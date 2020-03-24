@@ -18,7 +18,7 @@ https://confluence.atlassian.com/adminjiracloud/integrating-with-development-too
 
 
 def jira_id_in_commit_msg(commit_msg: str) -> bool:
-    return bool(re.search(JIRA_ID_REGEX, commit_msg))
+    return bool(re.match(JIRA_ID_REGEX, commit_msg))
 
 
 def commit_msg_hook(commit_msg_filepath: str) -> None:

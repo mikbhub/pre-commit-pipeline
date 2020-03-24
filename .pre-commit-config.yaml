@@ -55,6 +55,6 @@ repos:
         entry: pytest
         language: python
         types: [python]
-        args: [./]
+        args: [./, .hooks]
         stages: [push]
         always_run: true
