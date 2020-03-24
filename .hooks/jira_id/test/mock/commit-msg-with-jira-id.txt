@@ -1,0 +1,5 @@
+some text and 90 - [] ABC-1232 some more text
+- some fix
+- some improvement
+- some metric 100%
+- some ref to ADA-900

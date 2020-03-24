@@ -1,0 +1,51 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+# -   repo: local
+#     hooks:
+#     -   id: trailing-whitespace
+#         name: trailing-whitespace
+#         entry: python ./pre-commit-hooks/pre_commit_hooks/trailing_whitespace_fixer.py
+#         language: python
+#         types: [python]
+#     # -   id: end-of-file-fixer
+#     # -   id: check-yaml
+#     # -   id: check-added-large-files
+-   repo: local
+    hooks:
+    -   id: isort  # auto sort imports
+        name: isort
+        entry: isort
+        args: [--apply]
+        language: python
+        types: [python]
+    -   id: black  # autoformat code
+        name: black
+        entry: black
+        language: python
+        types: [python]
+        # always_run: true
+    -   id: flake8  # check style guide compilance
+        name: flake8
+        entry: flake8
+        language: python
+        types: [python]
+    -   id: mypy  # check type hints
+        name: mypy
+        entry: mypy
+        language: python
+        types: [python]
+    -   id: bandit  # find common security issues in Python codecurity
+        name: bandit
+        entry: bandit
+        args: [--config=.banditrc]
+        language: python
+        types: [python]
+    -   id: jira_id  # find common security issues in Python codecurity
+        name: Check for jira task id in commit message
+        entry: python ./.hooks/jira_id/jira_id_check.py
+        language: python
+        stages: [commit-msg]
+    # TODO
+    # commit message check (https://pre-commit.com/#filtering-files-with-types)
+    # to enforce jira task id into the message
