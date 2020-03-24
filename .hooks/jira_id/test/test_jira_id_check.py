@@ -11,8 +11,11 @@ def test_jira_id_in_commit_msg():
     assert success
 
 
-def test_jira_id_missing():
+@pytest.mark.parametrize(
+    "commit_msg", ["commit-msg-missing-jira-id.txt", "commit-msg-wrong-place.txt"]
+)
+def test_jira_id_missing(commit_msg):
     with pytest.raises(SystemExit) as e:
-        commit_msg_hook(f"{MOCK_PATH}/commit-msg-missing-jira-id.txt")
+        commit_msg_hook(f"{MOCK_PATH}/{commit_msg}")
     assert e.type == SystemExit
     assert e.value.code != 0
