@@ -19,33 +19,42 @@ repos:
         args: [--apply]
         language: python
         types: [python]
+        stages: [commit]
     -   id: black  # autoformat code
         name: black
         entry: black
         language: python
         types: [python]
-        # always_run: true
+        stages: [commit]
     -   id: flake8  # check style guide compilance
         name: flake8
         entry: flake8
         language: python
         types: [python]
+        stages: [commit]
     -   id: mypy  # check type hints
         name: mypy
         entry: mypy
         language: python
         types: [python]
+        stages: [commit]
     -   id: bandit  # find common security issues in Python codecurity
         name: bandit
         entry: bandit
         args: [--config=.banditrc]
         language: python
         types: [python]
-    -   id: jira_id  # find common security issues in Python codecurity
-        name: Check for jira task id in commit message
+        stages: [commit]
+    -   id: jira_id  # https://pre-commit.com/#filtering-files-with-types
+        name: JIRA id in commit message
         entry: python ./.hooks/jira_id/jira_id_check.py
         language: python
         stages: [commit-msg]
-    # TODO
-    # commit message check (https://pre-commit.com/#filtering-files-with-types)
-    # to enforce jira task id into the message
+    -   id: pytest  # find common security issues in Python codecurity
+        name: test suite
+        entry: pytest
+        language: python
+        types: [python]
+        args: [./]
+        stages: [push]
+        always_run: true
